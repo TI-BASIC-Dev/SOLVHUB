@@ -32,6 +32,8 @@
 0→ʟSODYN(12
 // ERASE SCREEN BOOL
 0→ʟSODYN(13
+// OPT ERASE BOOl
+0→ʟSODYN(14
 
 
 //CONSTANTS
@@ -144,6 +146,7 @@ Text(pxl_RowMax-15,pxl_ColMax-9,"►")
 #define pxlRow ʟSODYN(11)
 #define pxlCol ʟSODYN(12)
 #define eraseBool ʟSODYN(13)
+#defint optEraseBool ʟSODYN(14)
 
 1→runMode
 1→cachedOption
@@ -200,15 +203,32 @@ While runMode=1
         Text(R,C,"                                                                   ")
       End
     End
-    
     TextColor(BLACK
     0→eraseBool
   End
 
-
-
-
+  //Option Changer
+  If K=25
+    Then
+    cachedOption-1→cachedOption
+  End
   
+  If K=34
+    Then
+    cachedOption+1→cachedOption
+  End
+    
+  //Option Drawer
+  //If ((length(ʟDBASE)-2)/4)>1 
+  
+  
+  
+  
+  //End
+  //Option Eraser
+  //If  
+    
+  //End  
   //DEBUG
   If currentPageID=⁻1
     Then
@@ -281,6 +301,40 @@ While runMode=1
   
     //DBASE ALG .101 !!!!!!WIP!!!!!!
   
-
+  If currentPageID=.101
+    Then
+    Horizontal 0,BLACK
+    Line(0,graph_Ymax-20,0,graph_Ymin+20,BLACK
+    
+    
+    18→dim(ʟDBASE
+    
+    .1→ʟDBASE(1
+    4→ʟDBASE(2
+    
+    pxl_RowMin+21→ʟDBASE(3
+    pxl_ColMin+1→ʟDBASE(4
+    130→ʟDBASE(5
+    60→ʟDBASE(6
+    Text(ʟDBASE(3)+3,ʟDBASE(4)+7,"ALGEBRA"
+    
+    pxl_RowMax-81→ʟDBASE(7
+    pxl_ColMin+1ʟDBASE(8
+    130→ʟDBASE(9
+    60→ʟDBASE(10
+    Text(ʟDBASE(7)+3,ʟDBASE(8)+7,"PHYSICS"
+    
+    pxl_RowMin+21→ʟDBASE(11
+    pxl_ColMax-131→ʟDBASE(12
+    130→ʟDBASE(13
+    60→ʟDBASE(14
+    Text(ʟDBASE(11)+3,ʟDBASE(12)+7,"GEOMETRY"
+    
+    pxl_RowMax-81→ʟDBASE(15
+    pxl_ColMax-131→ʟDBASE(16
+    130→ʟDBASE(17
+    60→ʟDBASE(18
+    Text(ʟDBASE(15)+3,ʟDBASE(16)+7,"CALCULUS"
+  End
 
 End
