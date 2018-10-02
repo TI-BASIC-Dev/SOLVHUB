@@ -1,0 +1,286 @@
+//DRDYNAMS
+#define runMode ʟSODYN(1)
+#define keyPress ʟSODYN(2)
+//DYNAMIC
+//LISTS
+
+// list creation
+12→dim(ʟSODYN
+// runMode
+0→ʟSODYN(1
+// current getKey value
+0→ʟSODYN(2
+// current page id
+.1→ʟSODYN(3
+// cached page id
+0→ʟSODYN(4
+// cached options
+0→ʟSODYN(5
+// max options
+0→ʟSODYN(6
+// OPTION DIM WIDTH X
+0→ʟSODYN(7
+// OPTION DIM HEIGHT Y
+0→ʟSODYN(8
+// OPTION OFF X
+0→ʟSODYN(9
+// OPTION OFF Y
+0→ʟSODYN(10
+// PXLROW
+0→ʟSODYN(11
+// PXLCOL
+0→ʟSODYN(12
+// ERASE SCREEN BOOL
+0→ʟSODYN(13
+
+
+//CONSTANTS
+//LIST
+11→dim(ʟSOCON
+// pxl_RowMin
+0→ʟSOCON(1
+// pxl_RowMax
+164→ʟSOCON(2
+// pxl_ColMin
+0→ʟSOCON(3
+// pxl_ColMax
+264→ʟSOCON(4
+// gph_XMin
+⁻100→ʟSOCON(5
+// gph_XMax
+100→ʟSOCON(6
+// gph_YMin
+⁻100→ʟSOCON(7
+// gph_YMax
+100→ʟSOCON(8
+// Xscl
+1→ʟSOCON(9
+// Yscl
+1→ʟSOCON(10
+// Xres
+1→ʟSOCON(11
+
+//MODE SETUP
+[MATHPRINT]
+Normal
+Float
+Degree
+Func
+Thick
+Sequential
+Real
+Full
+
+//WINDOW SETUP
+ʟSOCON(5)→Xmin
+ʟSOCON(6)→Xmax
+ʟSOCON(7)→Ymin
+ʟSOCON(8)→Ymax
+ʟSOCON(9)→Xscl
+ʟSOCON(10)→Yscl
+ʟSOCON(11)→Xres
+
+//STATPLOT SETUP
+PlotsOff 
+
+//FORMAT SETUP
+ExprOff
+LabelOff
+AxesOff
+CoordOff
+RectGC
+GridOff
+BorderColor 1
+DetectAsymOff
+BackgroundOff
+
+//DRAW STATIC MENU
+#define graph_Xmin ʟSOCON(5)
+#define graph_Xmax ʟSOCON(6)
+#define graph_Ymin ʟSOCON(7)
+#define graph_Ymax ʟSOCON(8)
+
+#define pxl_RowMin ʟSOCON(1)
+#define pxl_RowMax ʟSOCON(2)
+#define pxl_ColMin ʟSOCON(3)
+#define pxl_ColMax ʟSOCON(4)
+
+
+TextColor(BLACK
+
+Horizontal graph_Ymin+20,BLACK
+Horizontal graph_Ymin+21,WHITE
+Horizontal graph_Ymin,BLACK
+Horizontal graph_Ymax,BLACK
+Vertical graph_Xmin,BLACK
+Vertical graph_Xmax-1,BLACK
+Horizontal graph_Ymax-20,BLACK
+
+//Left Arrow Line
+Line(10+graph_Xmin,17+graph_Ymin,10+graph_Xmin,graph_Ymin,BLACK
+
+//Right Arrow Line
+Line(⁻11+graph_Xmax,17+graph_Ymin,⁻11+graph_Xmax,graph_Ymin,BLACK
+
+//Left Arrow
+Text(pxl_RowMax-15,pxl_ColMin+4,"◄")
+
+//Right Arrow
+Text(pxl_RowMax-15,pxl_ColMax-9,"►")
+
+
+
+
+//DRDYNAMS
+
+#define currentPageID ʟSODYN(3)
+#define cachedPageID ʟSODYN(4)
+#define cachedOption ʟSODYN(5)
+#define maxOptions ʟSODYN(6)
+#define optDimWidthX ʟSODYN(7)
+#define optDimHeightY ʟSODYN(8)
+#define optOffX ʟSODYN(9)
+#define optOffY ʟSODYN(10)
+#define pxlRow ʟSODYN(11)
+#define pxlCol ʟSODYN(12)
+#define eraseBool ʟSODYN(13)
+
+1→runMode
+1→cachedOption
+.1→currentPageID
+1→dim(ʟDBASE
+.1→ʟDBASE(1
+"Menu"→Str9
+
+
+
+DispGraph
+
+While runMode=1
+
+  //Key Press Detector
+  Repeat 1=1
+    getKey→K
+    K→keyPress
+  End
+  
+  //Up Arrow Detector
+  If K=25 and cachedOption>1
+    Then
+    cachedOption-1→cachedOption
+  End
+  
+  //Down Arrow Detector
+  If K=34 and cachedOption<maxOptions
+    Then
+    cachedOption+1→cachedOption
+  End
+
+  //MODE Button Detector (Debug)
+  If K=22 and currentPageID≠⁻1
+    Then
+    currentPageID→cachedPageID
+    ⁻1→currentPageID
+    1→eraseBool
+    Else
+    If K=22 and currentPageID=⁻1
+      Then
+      cachedPageID→currentPageID
+      1→eraseBool
+    End
+  End
+    
+  //Page Eraser
+  If eraseBool=1
+    Then
+    TextColor(RED)
+    Text(pxl_RowMin+1,pxl_ColMin+5,"                                                 ")
+    For(R,17,139,13)
+      For(C,2,262,131)
+        Text(R,C,"                                                                   ")
+      End
+    End
+    
+    TextColor(BLACK
+    0→eraseBool
+  End
+
+
+
+
+  
+  //DEBUG
+  If currentPageID=⁻1
+    Then
+    Text(pxl_RowMin+1,pxl_ColMin+5,"DEBUG MENU"
+    Text(pxl_RowMin+21,pxl_ColMin+5,"RUNMODE: ",runMode
+    Text(pxl_RowMin+41,pxl_ColMin+5,"KEYPRESS: ",keyPress
+    Text(pxl_RowMin+61,pxl_ColMin+5,"CURPAGEID: ",currentPageID
+    Text(pxl_RowMin+81,pxl_ColMin+5,"CACPAGEID: ",cachedPageID
+    Text(pxl_RowMin+101,pxl_ColMin+5,"CACOPTION: ",cachedOption
+  End
+  
+  
+  TextColor(RED
+  Text(pxl_RowMax-15,pxl_ColMin+17,"Dir=",Str9
+  TextColor(BLACK
+  
+
+  //DATABASE
+    
+
+  
+  
+    //DBASE DEBUG -1
+  If currentPageID=⁻1
+    Then
+    2→dim(ʟDBASE
+    
+    ⁻1→ʟDBASE(1
+    0→ʟDBASE(2
+  End
+
+
+
+    //DBASE MAIN MENU .1
+  If currentPageID=.1
+    Then
+    Horizontal 0,BLACK
+    Line(0,graph_Ymax-20,0,graph_Ymin+20,BLACK
+    
+    
+    18→dim(ʟDBASE
+    
+    .1→ʟDBASE(1
+    4→ʟDBASE(2
+    
+    pxl_RowMin+21→ʟDBASE(3
+    pxl_ColMin+1→ʟDBASE(4
+    130→ʟDBASE(5
+    60→ʟDBASE(6
+    Text(ʟDBASE(3)+3,ʟDBASE(4)+7,"ALGEBRA"
+    
+    pxl_RowMax-81→ʟDBASE(7
+    pxl_ColMin+1ʟDBASE(8
+    130→ʟDBASE(9
+    60→ʟDBASE(10
+    Text(ʟDBASE(7)+3,ʟDBASE(8)+7,"PHYSICS"
+    
+    pxl_RowMin+21→ʟDBASE(11
+    pxl_ColMax-131→ʟDBASE(12
+    130→ʟDBASE(13
+    60→ʟDBASE(14
+    Text(ʟDBASE(11)+3,ʟDBASE(12)+7,"GEOMETRY"
+    
+    pxl_RowMax-81→ʟDBASE(15
+    pxl_ColMax-131→ʟDBASE(16
+    130→ʟDBASE(17
+    60→ʟDBASE(18
+    Text(ʟDBASE(15)+3,ʟDBASE(16)+7,"CALCULUS"
+  End
+  
+    //DBASE ALG .101 !!!!!!WIP!!!!!!
+  
+
+
+End
