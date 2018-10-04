@@ -274,6 +274,8 @@ While runMode=1
     .1→ʟDBASE(1
     4→ʟDBASE(2
     
+    Text(pxl_RowMin+1,pxl_ColMin+5,"MAIN MENU"
+    
     pxl_RowMin+21→ʟDBASE(3
     pxl_ColMin+1→ʟDBASE(4
     130→ʟDBASE(5
@@ -312,6 +314,7 @@ While runMode=1
     .1→ʟDBASE(1
     4→ʟDBASE(2
     
+    Text(pxl_RowMin+1,pxl_ColMin+5,"ALGEBRA MENU"
     pxl_RowMin+21→ʟDBASE(3
     pxl_ColMin+1→ʟDBASE(4
     130→ʟDBASE(5
