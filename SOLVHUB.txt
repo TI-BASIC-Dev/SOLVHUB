@@ -4,7 +4,7 @@
 //LISTS
 
 // list creation
-12→dim(ʟSODYN
+14→dim(ʟSODYN
 // runMode
 0→ʟSODYN(1
 // current getKey value
@@ -37,7 +37,7 @@
 
 //CONSTANTS
 //LIST
-11→dim(ʟSOCON
+4→dim(ʟSOCON
 // pxl_RowMin
 0→ʟSOCON(1
 // pxl_RowMax
@@ -49,7 +49,7 @@
 
 //DBASE MATRIX
 
-{35,5}→dim([J])
+{27,7}→dim([J])
 
 ⁻2→[J](1,1)
 0→[J](2,1)
@@ -62,25 +62,25 @@
 0→[J](2,3)
 4→[J](3,3)
 
-21→[J](4,3)
-1→[J](5,3)
-130→[J](6,3)
-60→[J](7,3)
+    18→[J](4,3)
+    2→[J](5,3)
+    129→[J](6,3)
+    64→[J](7,3)
+    
+    84→[J](8,3)
+    2→[J](9,3)
+    129→[J](10,3)
+    64→[J](11,3)
 
-83→[J](8,3)
-1→[J](9,3)
-130→[J](10,3)
-60→[J](11,3)
+    18→[J](12,3)
+    134→[J](13,3)
+    129→[J](14,3)
+    64→[J](15,3)
 
-21→[J](12,3)
-133→[J](13,3)
-130→[J](14,3)
-60→[J](15,3)
-
-83→[J](16,3)
-133→[J](17,3)
-130→[J](18,3)
-60→[J](19,3)
+    84→[J](16,3)
+    134→[J](17,3)
+    129→[J](18,3)
+    64→[J](19,3)
 
 //MODE SETUP
 [MATHPRINT]
@@ -95,8 +95,8 @@ Full
 
 //WINDOW SETUP
 0→Xmin
-84→Xmax
-⁻72→Ymin
+264→Xmax
+⁻164→Ymin
 0→Ymax
 1→Xscl
 1→Yscl
@@ -170,9 +170,8 @@ Text(pxl_RowMax-15,pxl_ColMax-9,"►")
 1→runMode
 1→cachedOption
 .1→currentPageID
-"Menu"→Str9
-
-
+"Menu      "→Str9
+"0.1"→Str3
 
 DispGraph
 
@@ -183,17 +182,27 @@ While runMode=1
     getKey→K
     K→keyPress
   End
-  
+
   //Up Arrow Detector
   If K=25 and cachedOption>1
     Then
     cachedOption-1→cachedOption
+    //PREVIOUS OPTION DRAWER ERASER
+    Line(ʟSCACA(3),⁻ʟSCACA(2),ʟSCACA(3)+ʟSCACA(4),⁻ʟSCACA(2),WHITE)
+    Line(ʟSCACA(3)+ʟSCACA(4)-1,⁻1*ʟSCACA(2),ʟSCACA(3)+ʟSCACA(4)-1,⁻ʟSCACA(2)-ʟSCACA(5)+1,WHITE)
+    Line(ʟSCACA(3)+ʟSCACA(4)-1,⁻ʟSCACA(2)-ʟSCACA(5)+2,ʟSCACA(3),⁻ʟSCACA(2)-ʟSCACA(5)+2,WHITE)
+    Line(ʟSCACA(3),⁻ʟSCACA(2)-ʟSCACA(5)+2,ʟSCACA(3),⁻ʟSCACA(2),WHITE)
   End
   
   //Down Arrow Detector
   If K=34 and cachedOption<maxOptions
     Then
     cachedOption+1→cachedOption
+    //PREVIOUS OPTION DRAWER ERASER
+    Line(ʟSCACA(3),⁻ʟSCACA(2),ʟSCACA(3)+ʟSCACA(4),⁻ʟSCACA(2),WHITE)
+    Line(ʟSCACA(3)+ʟSCACA(4)-1,⁻1*ʟSCACA(2),ʟSCACA(3)+ʟSCACA(4)-1,⁻ʟSCACA(2)-ʟSCACA(5)+1,WHITE)
+    Line(ʟSCACA(3)+ʟSCACA(4)-1,⁻ʟSCACA(2)-ʟSCACA(5)+2,ʟSCACA(3),⁻ʟSCACA(2)-ʟSCACA(5)+2,WHITE)
+    Line(ʟSCACA(3),⁻ʟSCACA(2)-ʟSCACA(5)+2,ʟSCACA(3),⁻ʟSCACA(2),WHITE)
   End
 
   //MODE Button Detector (Debug)
@@ -210,24 +219,23 @@ While runMode=1
     End
   End
     
-  //Page Eraser
-  If eraseBool=1
-    Then
-    TextColor(RED)
-    Text(pxl_RowMin+1,pxl_ColMin+5,"                                                 ")
-    For(R,17,139,13)
-      For(C,2,262,132)
-        Text(R,C,"                                                                   ")
-      End
-    End
-    TextColor(BLACK
-    0→eraseBool
-  End
+
+
+  //Arrow Key Drawer
+  Text(pxl_RowMax-15,pxl_ColMin+4,"◄")
+  Text(pxl_RowMax-15,pxl_ColMax-9,"►")
+  
 
   //Option>Page Changer
   If K=105 and currentPageID≠⁻1 and currentPageID≠⁻2
     Then
     currentPageID→N
+    1→eraseBool
+    
+    
+    TextColor(RED)
+    Text(pxl_RowMax-15,pxl_ColMax-9,"►")
+    TextColor(BLACK
     
     //NUM TO STRING CURR
     {0,1→L₁
@@ -246,6 +254,8 @@ While runMode=1
     
     //NUM TO STRING FINAL
     expr(Str1+Str2)→currentPageID
+    Str1+Str2→Str3
+    1→cachedOption
     DelVar N
     DelVar L₁
     DelVar L₂
@@ -253,21 +263,51 @@ While runMode=1
     DelVar r₂
   End
     
-  //OPTION DRAWER    [WIP]
-  2→ʟDIM
+
+  
+  //TURNS MATRIX COLUMN TO LIST
+  2→dim(ʟDIM)
   dim([J])→ʟDIM
   
-  1→dim(ʟSOLVX
+  1→dim(ʟSCACP
   For(I,1,ʟDIM(2),1)
-    Matr►list([J],I,ʟSOLVX)
-    
-    
+    If [J](4,I)≠0 and currentPageID=[J](1,I)
+    Then
+      Matr►list([J],I,ʟSCACP)
+    End
   End
   
-  //Option Eraser
-  //If  
+  //TAKES APART LIST BASED ON CURRENT OPTION > STORES OPTION DIMENSIONS TO A STRUCTURED LIST 
+  1→dim(ʟSCACA)
+  For(P,4,dim(ʟSCACP),1)
+    If P≥(cachedOption*4) and P≤((cachedOption*4)+3)
+      Then
+      ʟSCACP(P)→ʟSCACA(1+dim(ʟSCACA))
+    End
+  End
+  
+  //DRAWS OPTIONS BASED ON STRUCTURED LIST
+  If dim(ʟSCACA)=5
+    Then
+    Line(ʟSCACA(3),⁻ʟSCACA(2),ʟSCACA(3)+ʟSCACA(4),⁻ʟSCACA(2),RED)
+    Line(ʟSCACA(3)+ʟSCACA(4)-1,⁻1*ʟSCACA(2),ʟSCACA(3)+ʟSCACA(4)-1,⁻ʟSCACA(2)-ʟSCACA(5)+1,RED)
+    Line(ʟSCACA(3)+ʟSCACA(4)-1,⁻ʟSCACA(2)-ʟSCACA(5)+2,ʟSCACA(3),⁻ʟSCACA(2)-ʟSCACA(5)+2,RED)
+    Line(ʟSCACA(3),⁻ʟSCACA(2)-ʟSCACA(5)+2,ʟSCACA(3),⁻ʟSCACA(2),RED)
+  End
+  
+  //Previous Directory Changer
+  If K=21 and currentPageID≠⁻2 and currentPageID≠⁻1 and length(Str3)>3
+    Then
     
-  //End  
+    1→eraseBool
+    
+    TextColor(RED)
+    Text(pxl_RowMax-15,pxl_ColMin+4,"◄")
+    TextColor(BLACK)
+    
+    sub(Str3,1,length(Str3)-2)→Str3
+    expr(Str3)→currentPageID
+  End
   
   //DEBUG
   If currentPageID=⁻1
@@ -280,12 +320,26 @@ While runMode=1
     Text(pxl_RowMin+101,pxl_ColMin+5,"CACOPTION: ",cachedOption
   End
   
-  
+  //DIRECTORY DRAWER
   TextColor(RED
   Text(pxl_RowMax-15,pxl_ColMin+17,"Dir=",Str9
   TextColor(BLACK
   
 
+    //Page Eraser
+  If eraseBool=1
+    Then
+    TextColor(RED)
+    Text(pxl_RowMin+1,pxl_ColMin+5,"                                                 ")
+    For(R,17,139,13)
+      For(C,2,262,132)
+        Text(R,C,"                                                                   ")
+      End
+    End
+    TextColor(BLACK
+    0→eraseBool
+  End
+  
   //!!!DATABASE STARTS HERE!!!
     
   //DBASE ABOUT
@@ -303,7 +357,7 @@ While runMode=1
   //DBASE DEBUG -1
   If currentPageID=⁻1
     Then
-    
+    "DEBUG      "→Str9
     ⁻1→[J](1,2)
     0→[J](2,2)
   End
@@ -318,38 +372,190 @@ While runMode=1
     Horizontal Ymin/2,BLACK
     Line(Xmax/2,Ymin*(1/10),Xmax/2,Ymin*(9/10),BLACK
     
+    "MENU                  "→Str9
     4→maxOptions
-    .1→[J](1,3)
+    currentPageID→[J](1,3)
     0→[J](2,3)
-    4→[J](3,3)
+    maxOptions→[J](3,3)
     
     Text(pxl_RowMin+1,pxl_ColMin+5,"MAIN MENU"
     
-    21→[J](4,3)
-    1→[J](5,3)
-    130→[J](6,3)
-    60→[J](7,3)
+    18→[J](4,3)
+    2→[J](5,3)
+    129→[J](6,3)
+    64→[J](7,3)
+
     Text([J](4,3)+3,[J](5,3)+7,"ALGEBRA"
     Line(Xmax/4,Ymin/4,Xmax/3,Ymin/2.25)
     Line(Xmax/6,Ymin/2.5,Xmax*(4/10),Ymin/3)
     
-    83→[J](8,3)
-    1→[J](9,3)
-    130→[J](10,3)
-    60→[J](11,3)
-    Text([J](8,3)+3,[J](9,3)+7,"PHYSICS"
+    84→[J](8,3)
+    2→[J](9,3)
+    129→[J](10,3)
+    65→[J](11,3)
+
+    Text([J](8,3)+7,[J](9,3)+7,"PHYSICS"
     
-    21→[J](12,3)
-    133→[J](13,3)
-    130→[J](14,3)
-    60→[J](15,3)
+    18→[J](12,3)
+    134→[J](13,3)
+    129→[J](14,3)
+    64→[J](15,3)
     Text([J](12,3)+3,[J](13,3)+7,"GEOMETRY"
     
-    83→[J](16,3)
-    133→[J](17,3)
-    130→[J](18,3)
-    60→[J](19,3)
-    Text([J](16,3)+3,[J](17,3)+7,"CALCULUS"
+    84→[J](16,3)
+    134→[J](17,3)
+    129→[J](18,3)
+    65→[J](19,3)
+    Text([J](16,3)+7,[J](17,3)+7,"CALCULUS"
   End
+  
+    //DBASE ALGEBRA
+  If currentPageID=.101
+    Then
+    
+    //DIVIDING LINES
+    Horizontal Ymin/2,BLACK
+    Line(Xmax/2,Ymin*(1/10),Xmax/2,Ymin*(9/10),BLACK
+    
+    "ALGEBRA  "→Str9
+    4→maxOptions
+    currentPageID→[J](1,4)
+    0→[J](2,4)
+    maxOptions→[J](3,4)
+    
+    Text(pxl_RowMin+1,pxl_ColMin+5,"ALGEBRA"
+    
+    18→[J](4,4)
+    2→[J](5,4)
+    129→[J](6,4)
+    64→[J](7,4)
+
+    Text([J](4,4)+3,[J](5,4)+7,"OPTION 1"
+    
+    84→[J](8,4)
+    2→[J](9,4)
+    129→[J](10,4)
+    65→[J](11,4)
+
+    Text([J](8,4)+7,[J](9,4)+7,"OPTION 2"
+    
+    18→[J](12,4)
+    134→[J](13,4)
+    129→[J](14,4)
+    64→[J](15,4)
+    Text([J](12,4)+3,[J](13,4)+7,"OPTION 3"
+    
+    84→[J](16,4)
+    134→[J](17,4)
+    129→[J](18,4)
+    65→[J](19,4)
+    Text([J](16,4)+7,[J](17,4)+7,"OPTION 4"
+  End
+  
+  //DBASE GEOMETRY
+  If currentPageID=.103
+    Then
+
+    //DIVIDING LINES
+    Line(Xmax/2,Ymin*(1/10),Xmax/2,Ymin*(9/10),BLACK
+    
+    "Dim               "→Str9
+    Text(pxl_RowMin+1,pxl_ColMin+5,"GEOMETRY"
+    2→maxOptions
+    currentPageID→[J](1,5)
+    0→[J](2,5)
+    maxOptions→[J](3,5)
+
+    18→[J](4,5)
+    2→[J](5,5)
+    129→[J](6,5)
+    131→[J](7,5)
+    Text([J](4,5)+3,[J](5,5)+7,"2D"
+
+
+    18→[J](8,5)
+    134→[J](9,5)
+    129→[J](10,5)
+    131→[J](11,5)
+    Text([J](8,5)+3,[J](9,5)+7,"3D"
+  End
+  
+  //DBASE GEOMETRY 3D
+  If currentPageID=.10302
+    Then
+
+    //DIVIDING LINES
+    Line(Xmax/3,Ymin*(1/10),Xmax/3,Ymin*(9/10),BLACK
+    Line(Xmax*(2/3),Ymin*(1/10),Xmax*(2/3),Ymin*(9/10),BLACK
+    Horizontal Ymin/2,BLACK
+    
+    "Geo               "→Str9
+    Text(pxl_RowMin+1,pxl_ColMin+5,"GEOMETRY"
+    6→maxOptions
+    currentPageID→[J](1,6)
+    0→[J](2,6)
+    maxOptions→[J](3,6)
+
+    18→[J](4,6)
+    2→[J](5,6)
+    85→[J](6,6)
+    64→[J](7,6)
+    Text([J](4,6)+3,[J](5,6)+7,"RECT PRISM"
+
+
+    84→[J](8,6)
+    2→[J](9,6)
+    85→[J](10,6)
+    65→[J](11,6)
+    Text([J](8,6)+3,[J](9,6)+7,"SPHERE"
+    
+    18→[J](12,6)
+    90→[J](13,6)
+    85→[J](14,6)
+    64→[J](15,6)
+    Text([J](12,6)+3,[J](13,6)+7,"CYLINDER"
+    
+    84→[J](16,6)
+    90→[J](17,6)
+    85→[J](18,6)
+    65→[J](19,6)
+    Text([J](16,6)+3,[J](17,6)+7,"TRI-PRISM"
+    
+    18→[J](20,6)
+    178→[J](21,6)
+    85→[J](22,6)
+    64→[J](23,6)
+    Text([J](20,6)+3,[J](21,6)+7,"OPTION 5"
+    
+    84→[J](24,6)
+    178→[J](25,6)
+    85→[J](26,6)
+    65→[J](27,6)
+    Text([J](24,6)+3,[J](25,6)+7,"REGULAR"
+    Text([J](24,6)+16,[J](25,6)+7,"POLYGON"
+  End
+
+  //DBASE REG POLY DRAWER
+  If currentPageID=.1030206
+    Then
+
+    //DIVIDING LINES
+    Line(Xmax/2,Ymin*(1/10),Xmax/2,Ymin*(9/10),BLACK
+    
+    "Reg Poly            "→Str9
+    Text(pxl_RowMin+1,pxl_ColMin+5,"REG. POLY. PYR. SOLVER"
+    0→maxOptions
+    currentPageID→[J](1,7)
+    0→[J](2,7)
+    maxOptions→[J](3,7)
+  
+    Circle(60,⁻80,30,RED)
+    
+    
+  End
+  
+  
+  
+  
   
 End
