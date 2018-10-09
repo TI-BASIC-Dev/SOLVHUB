@@ -3,7 +3,8 @@
  
 A Trello Board has been created for this program to track progress.  It can be viewed with the following link:
 https://trello.com/b/MRxSJenW
-(Fixed Trello board from private to public)
+
+_(Fixed Trello board from private to public)_
 
 This program currently has no functional features, as the framework is being established.
 
