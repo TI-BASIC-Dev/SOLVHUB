@@ -15,4 +15,6 @@ directories of custom content can be added anytime by the user, provided they ha
 ![alt-text](https://github.com/TI-BASIC-Dev/SOLVHUB/blob/master/Images/mainmenu.png?raw=true "SolvHUB Main Menu")
 
 ## MODIFICATION
+For those who want to use elements of this program, here is a visual description of how the directory system works, and the current directory map.
+
 ![alt text](https://github.com/TI-BASIC-Dev/SOLVHUB/blob/master/Images/SolvHUB-planning.png?raw=true "SolvHUB Planning Tree")
