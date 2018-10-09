@@ -13,4 +13,4 @@ The structure of this program doesn't contain any labels/gotos, and is structure
 directories of custom content can be added anytime by the user, provided they have knowledge of TI-BASIC.
 
 ## MODIFICATION
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](https://github.com/TI-BASIC-Dev/SOLVHUB/blob/master/Images/SolvHUB-planning.png?raw=true "SolvHUB Planning Tree")
