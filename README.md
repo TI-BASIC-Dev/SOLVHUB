@@ -11,5 +11,5 @@ Once the framework has been completed, functional features will be added.
 ## FEATURES
 The structure of this program doesn't contain any labels/gotos, and is structured enough so the maximum 97
 directories of custom content can be added anytime by the user, provided they have knowledge of TI-BASIC.
- 
-Structure visuals will be added soon.
+
+## MODIFICATION
