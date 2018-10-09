@@ -20,4 +20,4 @@ For those who want to use elements of this program, here is a visual description
 ![alt text](https://github.com/TI-BASIC-Dev/SOLVHUB/blob/master/Images/SolvHUB-planning.png?raw=true "SolvHUB Planning Tree")
 
 ### About
-For suggested features or collaboration requests, contact me via the email on ![my profile]("https://github.com/TI-BASIC-Dev").
+For suggested features or collaboration requests, contact me via the email via [my email](https://github.com/TI-BASIC-Dev).
