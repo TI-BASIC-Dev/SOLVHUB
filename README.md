@@ -11,6 +11,7 @@ Once the framework has been completed, functional features will be added.
 ## FEATURES
 The structure of this program doesn't contain any labels/gotos, and is structured enough so the maximum 97
 directories of custom content can be added anytime by the user, provided they have knowledge of TI-BASIC.
+![alt-text](https://github.com/TI-BASIC-Dev/SOLVHUB/blob/master/Images/mainmenu.png?raw=true "SolvHUB Main Menu")
 
 ## MODIFICATION
 ![alt text](https://github.com/TI-BASIC-Dev/SOLVHUB/blob/master/Images/SolvHUB-planning.png?raw=true "SolvHUB Planning Tree")
